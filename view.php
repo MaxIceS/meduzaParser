@@ -12,15 +12,25 @@
     				var id = this.getAttribute("id");
     				console.log("aaaaa" + id);
     				var newsElement = document.getElementById("text_"+ id);
-    				var oMyBlob = new Blob([newsElement.innerHTML], {type : 'text/html'}); // the blob
+    				var oMyBlob = new Blob([newsElement.value], {type : 'text/html'}); // the blob
 					var downloadUrl = URL.createObjectURL(oMyBlob);
     				var div = document.getElementById("div_"+ id);
-    				var a = document.createElement('a');
+
+    				var isAalreadyExist = true;
+    				var a = document.getElementById("a_"+ id);
+    				if (a == null){
+    					a = document.createElement('a');
+    					isAalreadyExist = false;
+    				}
+    				a.id = "a_" + id;
 		            a.title = "Скачать бесплатно!";
 		            a.innerHTML = a.title;
 		            a.href = downloadUrl;
 		            a.download = a.title;
-    				div.appendChild(a);
+		            
+		            if (false == isAalreadyExist){
+	    				div.appendChild(a);
+	    			}
 				})
     		};
 		});
