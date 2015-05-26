@@ -5,11 +5,11 @@
 		$result = '';
 		foreach ($news as $new) {
 			$result .= '<div id="div_'.++$i.'" class="edit-news-modal-window">';
-			$result .= 		'<textarea id="text_'.$i.'" class="news" cols=50 rows=3>';
+			$result .= 		'<div id="text_'.$i.'" class="news" cols=50 rows=3 contenteditable="true">';
 			$result .=			highlight($new->nodeValue);
-			$result .= 		"</textarea>";
+			$result .= 		'</div>';
 			$result .= 		'<button id="'.$i.'" class="btn-save-news-to-file">';
-			$result .= 		'Сохранить новость в файл</button>';
+			$result .= 		'Save</button>';
 			$result .= '</div>';
 		}
 		return $result;	
@@ -23,7 +23,7 @@
 			$result .= '<div id="div_'.++$i.'_dispalay">';
 			$result .=		highlight($new->nodeValue);
 			$result .= '</div>';
-			$result .= '<a href="#div_'.$i.'" name="modal">Редактировать новость</a>';
+			$result .= '<a href="#div_'.$i.'" name="modal">Edit</a>';
 		}
 		return $result;
 	}

@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Parser for meduza.io</title>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
+	<script type="text/javascript" src="highlight.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script type="text/javascript">
 
@@ -47,7 +48,9 @@
 			
 			//if mask is clicked
 			$('#mask').click(function () {
-				var editedNewsContent = $(currentPopupNewsId + " > textarea" ).val();
+				var editedNewsContent = $(currentPopupNewsId + " > div" ).html();
+				console.log(editedNewsContent);
+				var editedNewsContent = highlight(editedNewsContent);
 				console.log(editedNewsContent);
 				var dispalayDivId = currentPopupNewsId + "_dispalay";
 				$(dispalayDivId).html(editedNewsContent);
@@ -63,7 +66,7 @@
     				var id = this.getAttribute("id");
     				console.log("aaaaa" + id);
     				var newsElement = document.getElementById("text_"+ id);
-    				var oMyBlob = new Blob([newsElement.value], {type : 'text/html'}); // the blob
+    				var oMyBlob = new Blob([newsElement.innerHTML], {type : 'text/html'}); // the blob
 					var downloadUrl = URL.createObjectURL(oMyBlob);
     				var div = document.getElementById("div_"+ id);
 

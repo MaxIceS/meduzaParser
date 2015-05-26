@@ -11,6 +11,8 @@ span.word{
 }
 
 div.edit-news-modal-window{
+	border: 4px solid black;
+	background-color: rgb(60, 133, 165);
 	display: none;
 	z-index: 9999;
 }
