@@ -1,4 +1,6 @@
 <?php
+	// header('Content-type: text/plain; charset=utf-8');
+
 	function getHiddenModalWindow($news)
 	{
 		$i = 0;
@@ -23,6 +25,7 @@
 			$result .= '<div id="div_'.++$i.'_dispalay">';
 			$result .=		highlight($new->nodeValue);
 			$result .= '</div>';
+			$result .= '<span id="div_'.$i.'">'.mb_strlen($new->nodeValue).'</span> ';
 			$result .= '<a href="#div_'.$i.'" name="modal">Edit</a>';
 		}
 		return $result;

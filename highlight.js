@@ -1,11 +1,15 @@
 function highlight (str) {
 	var newStr = clearSpans(str);
 
+	var lengthClearNews = newStr.length;
+
 	var pattern_word_with_t = /([а-яА-Я]+?[тТ]+?[а-яА-Я]+)/g;
 	newStr = str.replace(pattern_word_with_t, '<span class="word">$1</span>');
 
 	var pattern_number = /(\d+?)/g;
-	return newStr.replace(pattern_number, '<span class="numbers">$1</span>');
+	newStr = newStr.replace(pattern_number, '<span class="numbers">$1</span>');
+
+	return {string: newStr, length: lengthClearNews};
 }
 
 function clearSpans (str) {

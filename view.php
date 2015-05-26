@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
+	<!-- <meta charset="UTF-8"> -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>Parser for meduza.io</title>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
 	<script type="text/javascript" src="highlight.js"></script>
@@ -49,11 +50,15 @@
 			//if mask is clicked
 			$('#mask').click(function () {
 				var editedNewsContent = $(currentPopupNewsId + " > div" ).html();
-				console.log(editedNewsContent);
+				// console.log(editedNewsContent);
 				var editedNewsContent = highlight(editedNewsContent);
-				console.log(editedNewsContent);
+				// console.log(editedNewsContent);
 				var dispalayDivId = currentPopupNewsId + "_dispalay";
-				$(dispalayDivId).html(editedNewsContent);
+				$(dispalayDivId).html(editedNewsContent.string);
+				console.log("span" + currentPopupNewsId);
+				console.log($("span" + currentPopupNewsId).html());
+				console.log(editedNewsContent.length);
+				$("span" + currentPopupNewsId).html(editedNewsContent.length);
 				$(this).hide();
 				$('.edit-news-modal-window').hide();
 			});
@@ -93,6 +98,8 @@
 </head>
 <body>
 	<?php
+		// header('Content-type: text/plain; charset=utf-8');
+
 		include 'utils.php';
 		// This need comment by deploy for Ogorodnik
 		libxml_use_internal_errors(true);
