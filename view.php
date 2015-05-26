@@ -3,8 +3,68 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Parser for meduza.io</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.pack.js"></script>
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<script type="text/javascript">
+
+		var currentPopupNewsId = null;
+
+		$(document).ready(function() {	
+
+			//select all the a tag with name equal to modal
+			$('a[name=modal]').click(function(e) {
+				//Cancel the link behavior
+				e.preventDefault();
+				
+				//Get the A tag
+				var id = $(this).attr('href');
+				currentPopupNewsId = id;
+			
+				//Get the screen height and width
+				var maskHeight = $(document).height();
+				var maskWidth = $(window).width();
+			
+				//Set heigth and width to mask to fill up the whole screen
+				$('#mask').css({'width':maskWidth,'height':maskHeight});
+				
+				//transition effect		
+				$('#mask').fadeIn(1000);	
+				$('#mask').fadeTo("slow",0.8);	
+			
+				//Get the window height and width
+				var winH = $(window).height();
+				var winW = $(window).width();
+		              
+				//Set the popup window to center
+				$(id).css('position', "absolute");				
+				$(id).css('left', winW/2-$(id).width()/2);
+				$(id).css('top',  winH/2-$(id).height()/2);
+				
+				//transition effect
+				$(id).fadeIn(2000); 
+			
+			});
+			
+			//if close button is clicked
+			// $('.close').click(function (e) {
+			// 	//Cancel the link behavior
+			// 	e.preventDefault();
+				
+			// 	$('#mask').hide();
+			// 	$('.edit-news-modal-window').hide();
+			// });		
+			
+			//if mask is clicked
+			$('#mask').click(function () {
+				var editedNewsContent = $(currentPopupNewsId + " > textarea" ).val();
+				console.log(editedNewsContent);
+				var dispalayDivId = currentPopupNewsId + "_dispalay";
+				$(dispalayDivId).html(editedNewsContent);
+				$(this).hide();
+				$('.edit-news-modal-window').hide();
+			});
+		});
+
 		document.addEventListener('DOMContentLoaded', function () {
 		    var buttons = document.querySelectorAll('.btn-save-news-to-file');
     		for (var i = buttons.length - 1; i >= 0; i--) { 
@@ -34,10 +94,13 @@
 				})
     		};
 		});
+
 	</script>
 </head>
 <body>
 	<?php 
+
+		include 'utils.php';
 		// This need comment by deploy for Ogorodnik
 		libxml_use_internal_errors(true);
 
@@ -52,14 +115,14 @@
    		if ($dom->loadHTML($html_str)){
 	   		$x_path = new DOMXPath($dom);
 			$news = $x_path->query('//span[@class="NewsTitle-first"]');
-			$i = 0;
-			foreach ($news as $new) {
-			    echo '<div id="div_'.++$i.'"><textarea id="text_'.$i.'" class="news" cols=50 rows=3>'.$new->nodeValue."</textarea>";
-			    echo '<button id="'.$i.'" class="btn-save-news-to-file">Сохранить новость в файл</button></div>';
-			}
+			echo getHiddenModalWindow($news);
+			echo getNewsDivs($news);
 		}else{
 			echo "Aaaaa, капец какой-то, Настя, мне надо уходить из программирования";
 		}
 	?>
+
+	<!-- Mask to cover the whole screen -->
+	<div id="mask"></div>
 </body>
 </html>

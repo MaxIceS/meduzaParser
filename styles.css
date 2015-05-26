@@ -1,5 +1,21 @@
 body {
-	background-color: red;
+	background-color: green;
 }
 
-/*Here was more css for beaty.*/
+span.numbers{
+	color: red;
+}
+
+div.edit-news-modal-window{
+	display: none;
+	z-index: 9999;
+}
+
+#mask {
+  position:absolute;
+  left:0;
+  top:0;
+  z-index:9000;
+  background-color:#000;
+  display:none;
+}
