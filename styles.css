@@ -6,6 +6,10 @@ span.numbers{
 	color: red;
 }
 
+span.word{
+	font-weight: bold;
+}
+
 div.edit-news-modal-window{
 	display: none;
 	z-index: 9999;

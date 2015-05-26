@@ -45,15 +45,6 @@
 			
 			});
 			
-			//if close button is clicked
-			// $('.close').click(function (e) {
-			// 	//Cancel the link behavior
-			// 	e.preventDefault();
-				
-			// 	$('#mask').hide();
-			// 	$('.edit-news-modal-window').hide();
-			// });		
-			
 			//if mask is clicked
 			$('#mask').click(function () {
 				var editedNewsContent = $(currentPopupNewsId + " > textarea" ).val();
@@ -83,7 +74,7 @@
     					isAalreadyExist = false;
     				}
     				a.id = "a_" + id;
-		            a.title = "Скачать бесплатно!";
+		            a.title = "Download free!";
 		            a.innerHTML = a.title;
 		            a.href = downloadUrl;
 		            a.download = a.title;
@@ -98,8 +89,7 @@
 	</script>
 </head>
 <body>
-	<?php 
-
+	<?php
 		include 'utils.php';
 		// This need comment by deploy for Ogorodnik
 		libxml_use_internal_errors(true);
@@ -115,10 +105,10 @@
    		if ($dom->loadHTML($html_str)){
 	   		$x_path = new DOMXPath($dom);
 			$news = $x_path->query('//span[@class="NewsTitle-first"]');
-			echo getHiddenModalWindow($news);
-			echo getNewsDivs($news);
+			$input = getHiddenModalWindow($news).getNewsDivs($news);
+			echo $input;
 		}else{
-			echo "Aaaaa, капец какой-то, Настя, мне надо уходить из программирования";
+			echo "Aaaaa, капец какой-то  - интеренет умер.";
 		}
 	?>
 
