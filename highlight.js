@@ -2,6 +2,12 @@ function highlight (str) {
 	var newStr = clearSpans(str);
 
 	var lengthClearNews = newStr.length;
+	
+	var count = (newStr.match(/\&nbsp;/g) || []).length;
+	
+	if (count > 0){
+			lengthClearNews -= count *5;
+	}
 
 	var pattern_word_with_t = /([а-яА-Я]+?[тТ]+?[а-яА-Я]+)/g;
 	newStr = str.replace(pattern_word_with_t, '<span class="word">$1</span>');
